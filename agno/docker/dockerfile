@@ -1,0 +1,19 @@
+FROM python:3.13-slim
+
+# Define diretório de trabalho
+WORKDIR /app
+
+# Copia os arquivos necessários
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+# Carregar variáveis de ambiente (.env será lido pelo python-dotenv no código)
+# (Se quiser enviar para o container, pode usar ENV ou docker secrets, mas para dev ok assim)
+
+# Expor porta se precisar (ajuste se houver API)
+EXPOSE 8500
+
+# Comando para rodar sua aplicação
+CMD ["python", "cookbook/models/google/gemini/basic.py"]
